@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/removing-stars-from-a-string/submissions/
+// https://leetcode.com/problems/removing-stars-from-a-string/
 
 //approach 1 using stack
 class Solution {
