@@ -73,3 +73,28 @@ class Solution {
         return solve(s,dp,0,n-1);
     }
 }
+
+//Approach 3: LCS Bottom up
+class Solution {
+    
+    private int solveTab(String s1, String s2, int i, int j){
+    int[][] dp = new int[s1.length()+1][s2.length()+1];
+    for(int k = s1.length() - 1; k >= 0; k--){
+        for(int l = s2.length() - 1; l >= 0; l--){
+            int ans = 0;
+            //match
+            if(s1.charAt(k) == s2.charAt(l))
+                ans = 1 + dp[k+1][l+1];
+            else ans = Math.max(dp[k][l+1],dp[k+1][l]);
+            dp[k][l] = ans;
+        }
+    }
+    return dp[i][j];
+}
+
+public int longestPalindromeSubseq(String s1) {
+    StringBuilder s2 = new StringBuilder(s1);
+    s2.reverse();
+    return solveTab(s1,s2.toString(),0,0);
+}
+}
