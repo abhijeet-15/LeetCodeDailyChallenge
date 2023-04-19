@@ -34,3 +34,28 @@ class Solution {
     }
 }
 
+// approach 2
+
+class Solution {
+    
+    private int maxi;
+    
+    private void solve(TreeNode root, int left, int right) {
+        
+        if(root == null) return;
+        
+        maxi = Math.max(maxi, Math.max(left, right));
+        
+        solve(root.left, right+1, 0);
+        solve(root.right, 0 , left+1);
+        
+    }
+    
+    public int longestZigZag(TreeNode root) { 
+        
+        this.maxi = 0;
+        solve(root,0,0);
+        
+        return maxi;
+    }
+}
