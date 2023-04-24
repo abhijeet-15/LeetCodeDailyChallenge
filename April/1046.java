@@ -46,3 +46,23 @@ class Solution {
         return pq.poll();
     }
 }
+
+// easier to read second approach
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
+        
+        for(int stone : stones) {
+            pq.offer(stone);
+        }
+        
+        while(pq.size() > 1) {
+            int max = pq.poll();
+            int secondMax = pq.poll();
+            
+            pq.offer(max-secondMax);
+        }
+        
+        return pq.poll();
+    }
+}
