@@ -85,3 +85,43 @@ class SmallestInfiniteSet {
         pq.offer(num);
     }
 }
+
+
+// approach 3 : Using a ordered set . SortedSet --> TreeSet
+
+class SmallestInfiniteSet {
+    
+    private SortedSet<Integer> st;
+    private int currSmallest;
+
+    public SmallestInfiniteSet() {
+        this.st = new TreeSet<>();
+        currSmallest = 1;
+    }
+    
+    public int popSmallest() {
+        
+        int res;
+        
+        if(!st.isEmpty()) {
+            res = st.first();
+            st.remove(res);
+        }
+        
+        else {
+            res = currSmallest;
+            currSmallest++;
+        }
+        
+        return res;
+    }
+    
+    public void addBack(int num) {
+        
+        if(currSmallest <= num || st.contains(num)) {
+            return;
+        }
+        
+        st.add(num);
+    }
+}
