@@ -39,3 +39,49 @@ class SmallestInfiniteSet {
         }
     }
 }
+
+
+// approach 2 --> using set and a priority queue
+
+class SmallestInfiniteSet {
+    
+    private int currSmallest;
+    private PriorityQueue<Integer> pq;
+    private Set<Integer> st;
+
+    public SmallestInfiniteSet() {
+        
+        this.currSmallest = 1;
+        this.pq = new PriorityQueue<Integer>((a,b)->(a-b));
+        this.st = new HashSet<>();
+    }
+    
+    public int popSmallest() {
+        
+        int res;
+        
+        if(!pq.isEmpty()) {
+            res = pq.peek();
+            pq.poll();
+            
+            st.remove(res);
+        }
+        
+        else {
+            res = currSmallest;
+            currSmallest++;
+        }
+        
+        return res;
+    }
+    
+    public void addBack(int num) {
+        
+        if(num >= currSmallest || st.contains(num)) {
+            return;
+        }
+        
+        st.add(num);
+        pq.offer(num);
+    }
+}
