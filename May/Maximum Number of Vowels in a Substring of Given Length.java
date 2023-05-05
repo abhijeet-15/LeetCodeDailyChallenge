@@ -24,6 +24,9 @@ class Solution {
             currCount += isVowel(s.charAt(i));
             
             ans = Math.max(ans, currCount);
+
+            //ans max value can be the window size
+            if(ans == k) return ans;
             
         }
         
