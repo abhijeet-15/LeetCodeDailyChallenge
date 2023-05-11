@@ -1,0 +1,111 @@
+// 1035
+// https://leetcode.com/problems/uncrossed-lines/
+// Recursion
+class Solution {
+    
+    private int m;
+    private int n;
+    
+    private int solve(int[] nums1, int[] nums2, int i, int j) {
+        
+        if(i>=m || j>=n) {
+            return 0;
+        }
+        
+        if(nums1[i] == nums2[j]) {
+            return 1 + solve(nums1,nums2,i+1,j+1);
+        }
+        
+        else {
+            return Math.max(solve(nums1,nums2,i,j+1), solve(nums1,nums2,i+1,j));
+        }
+    }
+    
+    
+    public int maxUncrossedLines(int[] nums1, int[] nums2) {
+        
+        this.m = nums1.length;
+        this.n = nums2.length;
+        
+        return solve(nums1, nums2, 0, 0);
+    }
+}
+
+// Rec + Memo
+class Solution {
+    
+    private int m;
+    private int n;
+    
+    private int solve(int[] nums1, int[] nums2, int [][]dp, int i, int j) {
+        
+        if(i>=m || j>=n) {
+            return 0;
+        }
+        
+        if(dp[i][j] != -1) {
+            return dp[i][j];
+        }
+        
+        if(nums1[i] == nums2[j]) {
+            return dp[i][j] = 1 + solve(nums1,nums2,dp,i+1,j+1);
+        }
+        
+        else {
+            return dp[i][j] = Math.max(solve(nums1,nums2,dp,i,j+1), solve(nums1,nums2,dp,i+1,j));
+        }
+    }
+    
+    
+    public int maxUncrossedLines(int[] nums1, int[] nums2) {
+        
+        this.m = nums1.length;
+        this.n = nums2.length;
+        
+        int dp[][] = new int[m+1][n+1];
+        
+        for(int[] d : dp)
+            Arrays.fill(d,-1);
+        
+        return solve(nums1, nums2, dp, 0, 0);
+    }
+}
+
+// bottom up
+
+/*
+ * t[i][j] = x 
+ * Max lines we can draw with nums1 of length i and nums2 of length j
+ * answer will be t[m][n]
+ */
+
+ class Solution {
+    
+    private int m;
+    private int n;
+   
+    public int maxUncrossedLines(int[] nums1, int[] nums2) {
+        this.m = nums1.length;
+        this.n = nums2.length;
+        
+        
+        int [][] dp = new int[m+1][n+1];
+        
+        for(int i=0; i<m+1; i++) {
+            for(int j=0; j<n+1; j++) {
+                
+                if(i == 0 || j == 0) {
+                    dp[i][j] = 0;
+                }
+                else if(nums1[i-1] == nums2[j-1]) {
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                }
+                else {
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
+        }
+        
+        return dp[m][n];
+    }
+}
