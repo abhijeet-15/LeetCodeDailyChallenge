@@ -75,3 +75,31 @@ class Solution {
         return solve(low, high, zero, one, dp, 0);
     }
 }
+
+// bottom up
+class Solution {
+    public int countGoodStrings(int low, int high, int zero, int one) {
+        
+        int mod = 1000000007;
+        
+        //t[i] == number of good strings of length i
+        int [] t = new int[high+1];
+        t[0] = 1; // ""
+        
+        for(int i=1; i<high+1; i++) {
+            if(i-zero >= 0) 
+                t[i] = (t[i]%mod + t[i-zero]%mod)%mod;
+            
+            if(i-one >=0)
+                t[i] = (t[i]%mod + t[i-one]%mod)%mod;
+        }
+        
+        int ans = 0;
+        
+        for(int l=low; l<=high; l++) {
+            ans = (ans%mod + t[l]%mod)%mod;
+        }
+        
+        return ans % mod;
+    }
+}
