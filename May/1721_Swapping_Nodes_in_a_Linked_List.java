@@ -49,3 +49,36 @@ class Solution {
         
     }
 }
+
+// approach 2 without calculating length
+class Solution {
+    
+    public ListNode swapNodes(ListNode head, int k) {
+        ListNode left = null;
+        ListNode right = null;
+        ListNode temp = head;
+        
+        while(temp != null) {
+            
+            if(right != null) {
+                right = right.next;
+            }
+            
+            k--;
+            
+            if(k == 0){
+                left = temp;
+                right = head; // activate
+            }
+            
+            temp = temp.next;
+        }
+        
+        int t = left.val;
+        left.val = right.val;
+        right.val = t;
+        
+        return head;
+        
+    }
+}
