@@ -45,3 +45,57 @@ class Solution {
        return answer; 
     } 
 }
+
+// Using ArrayList
+class Solution {
+    
+    public int pairSum(ListNode head) {
+        List<Integer> list = new ArrayList<>();
+        
+        ListNode temp = head;
+        while(temp != null) {
+            list.add(temp.val);
+            temp = temp.next;
+        }
+        
+        int res = 0;
+        
+        int i=0; 
+        int j=list.size()-1;
+        
+        while(i < j) {
+            res = Math.max(res, (list.get(i) + list.get(j)));
+            i++;
+            j--;
+        }
+        
+        return res;
+    }
+}
+
+//Stack based
+class Solution {
+    
+    public int pairSum(ListNode head) {
+       Stack<Integer> st = new Stack<>();
+        
+        ListNode temp = head;
+        while(temp != null) {
+            st.push(temp.val);
+            temp = temp.next;
+        }
+        
+        int N = st.size();
+        temp = head;
+        int i=0;
+        int result = 0;
+        
+        while(i <= N/2) {
+            result = Math.max(result, st.pop()+temp.val);
+            temp = temp.next;
+            i++;
+        }
+        
+        return result;
+    }
+}
