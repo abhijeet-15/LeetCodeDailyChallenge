@@ -33,5 +33,3 @@ class Solution {
         
     }
 }
-
-1376_Time_Needed_to_Inform All Employees.java
