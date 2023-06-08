@@ -32,3 +32,51 @@ class Solution {
         return count;
     }
 }
+
+
+//Brute Force O(mn)
+class Solution {
+    public int countNegatives(int[][] grid) {
+        
+        int m = grid.length;
+        int n = grid[0].length;
+        
+        int result = 0;
+        
+        for(int i = 0; i<m; i++) {
+            for(int j = 0; j<n; j++) {
+                
+                if(grid[i][j] < 0)
+                    result++;
+                
+            }
+        }
+        
+        return result;
+    }
+}
+
+//optimised
+class Solution {
+    public int countNegatives(int[][] grid) {
+         
+        int m = grid.length;
+        int n = grid[0].length;
+        
+        int row = m-1;
+        int col = 0;
+        
+        int result = 0;
+        while( row >= 0 && col < n) {
+            
+            if(grid[row][col] < 0) {
+                result += n-col;
+                row--;
+            } else {
+                col++;
+            }
+        }
+        
+        return result;
+    }
+}
