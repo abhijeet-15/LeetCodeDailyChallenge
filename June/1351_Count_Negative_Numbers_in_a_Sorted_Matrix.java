@@ -69,11 +69,11 @@ class Solution {
         int result = 0;
         while( row >= 0 && col < n) {
             
-            if(grid[row][col] < 0) {
+            if(grid[row][col] >= 0) {
+                col++;
+            } else {
                 result += n-col;
                 row--;
-            } else {
-                col++;
             }
         }
         
